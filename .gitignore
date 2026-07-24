@@ -1,0 +1,9 @@
+# Ignore vscode AI rules
+.github\instructions\codacy.instructions.md
+
+# Secrets / local env
+.env
+*.local
+
+# Supabase local artifacts (if you run supabase init)
+.supabase
