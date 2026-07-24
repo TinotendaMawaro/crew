@@ -40,6 +40,7 @@ function switchTab(tabId) {
 
         document.documentElement.style.setProperty('--scroll-color', '#6366f1');
         document.getElementById('pwa-theme-color').setAttribute('content', '#6366f1');
+        if (window.GlobeAPI) window.GlobeAPI.setTheme(false);
     } else {
         // Command Gold / Charcoal Velvet (HOD Theme)
         registerTab.classList.add('hidden');
@@ -60,6 +61,7 @@ function switchTab(tabId) {
 
         document.documentElement.style.setProperty('--scroll-color', '#f59e0b');
         document.getElementById('pwa-theme-color').setAttribute('content', '#f59e0b');
+        if (window.GlobeAPI) window.GlobeAPI.setTheme(true);
 
         renderAdminTable();
     }
