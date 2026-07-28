@@ -53,6 +53,24 @@ async function declineCrew(index) {
     } catch (_) { /* error already toasted in data layer */ }
 }
 
+/* ---- Receipt preview modal ---- */
+function viewReceipt(url) {
+    const modal = document.getElementById('receipt-modal');
+    const img = document.getElementById('receipt-preview-img');
+    const link = document.getElementById('receipt-download-link');
+    if (!modal || !img || !link) return;
+    img.src = url;
+    link.href = url;
+    link.classList.remove('hidden');
+    modal.classList.remove('hidden');
+}
+
+function closeReceiptModal() {
+    const modal = document.getElementById('receipt-modal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+}
+
 /* ---- Reassign modal ---- */
 function updateReassignSections() {
     const areaVal = document.getElementById('reassign-area').value;

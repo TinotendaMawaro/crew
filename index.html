@@ -585,6 +585,7 @@
                                     <th class="py-3 px-4">Gadget & S/N</th>
                                     <th class="py-3 px-4 text-center">Regalia Size</th>
                                     <th class="py-3 px-4">Clearance Status</th>
+                                    <th class="py-3 px-4 text-center">Receipt</th>
                                     <th class="py-3 px-4 text-center">Command Actions</th>
                                 </tr>
                             </thead>
@@ -660,6 +661,25 @@
                 <button onclick="confirmReassign()" class="flex-1 py-2.5 rounded-full text-xs font-bold bg-brand-gold text-black hover:bg-brand-goldLight transition shadow-lg">
                     Commit & Notify
                 </button>
+            </div>
+        </div>
+    </div>
+    <!-- CUSTOM MODAL: RECEIPT PREVIEW -->
+    <div id="receipt-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+        <div class="glassmorphism-hod rounded-3xl p-4 sm:p-6 max-w-2xl w-full border border-brand-gold/40 space-y-4 shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+            <div class="flex items-center justify-between pb-3 border-b border-brand-gold/20">
+                <h3 class="text-base font-bold font-serif text-white flex items-center gap-2 text-glow-gold">
+                    <i class="fa-solid fa-receipt text-brand-gold"></i> Regalia Receipt
+                </h3>
+                <button onclick="closeReceiptModal()" class="text-gray-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="bg-black/40 rounded-2xl border border-brand-gold/10 overflow-hidden">
+                <img id="receipt-preview-img" src="" alt="Receipt preview" class="w-full max-h-[70vh] object-contain">
+                <a id="receipt-download-link" href="" target="_blank" class="hidden block text-center py-3 text-xs font-bold text-brand-gold hover:text-white transition border-t border-brand-gold/20">
+                    Open Original File
+                </a>
             </div>
         </div>
     </div>

@@ -16,6 +16,10 @@ function renderCrewRow(member, index) {
         ? '<span class="text-green-400 text-xs">Yes</span>'
         : `<span class="text-brand-gold font-mono">${member.regaliaSize}</span>`;
 
+    const receiptCell = member.regaliaReceiptUrl
+        ? `<button onclick="viewReceipt('${member.regaliaReceiptUrl}')" class="h-8 w-8 rounded-lg bg-brand-gold/10 border border-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black transition" title="View Receipt"><i class="fa-solid fa-file-image"></i></button>`
+        : '<span class="text-[10px] text-gray-600">None</span>';
+
     return `
         <tr class="hover:bg-white/[0.02] border-b border-brand-gold/10 transition">
             <td class="py-4 px-4">
@@ -36,6 +40,9 @@ function renderCrewRow(member, index) {
             </td>
             <td class="py-4 px-4 text-xs font-bold text-center">
                 ${regaliaCell}
+            </td>
+            <td class="py-4 px-4 text-center">
+                ${receiptCell}
             </td>
             <td class="py-4 px-4">
                 <span class="px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider ${badgeStyle}">
