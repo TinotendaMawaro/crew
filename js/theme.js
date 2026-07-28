@@ -29,11 +29,11 @@ function switchTab(tabId) {
         logo.className = "h-20 w-20 bg-gradient-to-tr from-brand-indigo to-brand-cyan rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.5)] border border-brand-cyan/40 transition-theme";
 
         blob1.className = "absolute top-10 left-10 w-[450px] h-[450px] bg-brand-indigo/15 rounded-full blur-[110px] ambient-glow-circle pointer-events-none z-0 transition-theme";
-        blob2.className = "absolute top-1/3 right-10 w-[550px] h-[550px] bg-brand-blue/10 rounded-full blur-[130px] ambient-glow-circle pointer-events-none z-0 transition-theme";
+        blob2.className = "absolute top-1/3 right-10 w-[550px] h-[550px] bg-brand-indigo/10 rounded-full blur-[130px] ambient-glow-circle pointer-events-none z-0 transition-theme";
         blob3.className = "absolute bottom-10 left-1/3 w-[400px] h-[400px] bg-brand-cyan/15 rounded-full blur-[100px] ambient-glow-circle pointer-events-none z-0 transition-theme";
 
-        navBtnReg.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold border-2 border-brand-indigo bg-brand-indigo text-white shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all duration-300 flex items-center gap-2";
-        navBtnAdmin.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold border border-brand-indigo/35 text-gray-300 hover:border-brand-cyan hover:text-brand-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300 flex items-center gap-2";
+        navBtnReg.className = "px-3 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-sm font-bold border-2 border-brand-indigo bg-brand-indigo text-white shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all duration-300 flex items-center gap-2";
+        navBtnAdmin.className = "px-3 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-sm font-bold border border-brand-indigo/35 text-gray-300 hover:border-brand-cyan hover:text-brand-cyan hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300 flex items-center gap-2";
 
         navBtnAdmin.classList.remove('hidden');
         navBtnLogout.classList.add('hidden');
@@ -55,7 +55,7 @@ function switchTab(tabId) {
         blob2.className = "absolute top-1/3 right-10 w-[550px] h-[550px] bg-brand-velvet/20 rounded-full blur-[130px] ambient-glow-circle pointer-events-none z-0 transition-theme";
         blob3.className = "absolute bottom-10 left-1/3 w-[400px] h-[400px] bg-brand-gold/5 rounded-full blur-[100px] ambient-glow-circle pointer-events-none z-0 transition-theme";
 
-        navBtnReg.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold border border-brand-gold/35 text-gray-300 hover:border-brand-gold hover:text-brand-gold hover:shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all duration-300 flex items-center gap-2";
+        navBtnReg.className = "px-3 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-sm font-bold border border-brand-gold/35 text-gray-300 hover:border-brand-gold hover:text-brand-gold hover:shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all duration-300 flex items-center gap-2";
 
         navBtnAdmin.classList.add('hidden');
         navBtnLogout.classList.remove('hidden');

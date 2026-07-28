@@ -22,7 +22,7 @@ function renderToast(message, type) {
         baseColorClass += ' shadow-[0_0_20px_rgba(245,158,11,0.3)]';
     }
 
-    toast.className = `fixed top-24 left-1/2 -translate-x-1/2 z-50 ${baseColorClass} border px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 animate-bounce transition-all duration-300`;
+    toast.className = `fixed top-24 left-1/2 -translate-x-1/2 z-50 ${baseColorClass} border px-4 sm:px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 max-w-[90vw] animate-bounce transition-all duration-300`;
     toast.innerHTML = `<i class="fa-solid fa-circle-info"></i> ${message}`;
 
     document.body.appendChild(toast);

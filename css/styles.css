@@ -311,6 +311,51 @@ span[class*="rounded-full"],
         height: 3rem !important;
         width: 3rem !important;
     }
+
+    /* Background blobs - scale down for small screens */
+    #bg-blob-1,
+    #bg-blob-2,
+    #bg-blob-3 {
+        width: 60% !important;
+        height: 60% !important;
+        max-width: 280px !important;
+        max-height: 280px !important;
+    }
+    #bg-blob-1 {
+        top: 2% !important;
+        left: 2% !important;
+    }
+    #bg-blob-2 {
+        top: 25% !important;
+        right: 2% !important;
+    }
+    #bg-blob-3 {
+        bottom: 5% !important;
+        left: 15% !important;
+    }
+
+    /* Ensure content clears fixed bottom widgets */
+    main {
+        padding-bottom: 5rem !important;
+    }
+
+    /* Safe area for notched devices */
+    .fixed-floater {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    #chatbot-window {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* Prevent media and tables from overflowing */
+    img,
+    video,
+    canvas,
+    iframe,
+    table {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 /* ============= DARK LIGHT PROTECTIONS ============= */
