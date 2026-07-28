@@ -48,11 +48,27 @@ const sectionsData = {
    `registeredCrew` is a local cache kept in sync with the backend. */
 let registeredCrew = [];
 
+/* HOD authorized account metadata */
+const HOD_ACCOUNTS = [
+    { email: 'holyhappy@gmail.com', name: 'Farai Mutsvene' },
+    { email: 'tmawaro@gmail.com', name: 'Tinotenda Mawaro' }
+];
+
+const HOD_EMAIL_ALLOWLIST = HOD_ACCOUNTS.map(account => account.email);
+
 /* Shared UI state */
 const uiState = {
     currentStep: 1,
     selectedRegaliaChoice: true,
     currentEditingIndex: -1,
+    profileViewingIndex: -1,
     isHODAuthenticated: false,
+    hodLoggedInEmail: null,
+    hodLoggedInName: null,
     confirmActionPromiseResolve: null
 };
+
+function getHodName(email) {
+    const account = HOD_ACCOUNTS.find(account => account.email === email);
+    return account ? account.name : email;
+}

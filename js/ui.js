@@ -30,15 +30,18 @@ function submitHODEmail(e) {
     const emailInput = document.getElementById('hod-auth-email');
     const emailValue = emailInput.value.trim();
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailRegex.test(emailValue)) {
+    if (HOD_EMAIL_ALLOWLIST.includes(emailValue)) {
         uiState.isHODAuthenticated = true;
+        uiState.hodLoggedInEmail = emailValue;
+        uiState.hodLoggedInName = getHodName(emailValue);
+        const nameEl = document.getElementById('hod-logged-in-name');
+        if (nameEl) nameEl.textContent = uiState.hodLoggedInName;
         closeHODAuthModal();
         switchTab('admin');
-        renderToast(`Access granted for ${emailValue}`, "success");
+        renderToast(`Access granted for ${uiState.hodLoggedInName}`, "success");
         logSystemEmail("Administrator Access", "HOD command", `Logged in via: ${emailValue}`);
     } else {
-        renderToast("Please enter a valid email address to authenticate.", "warning");
+        renderToast("Access denied. You are not authorized to access the HOD Control Center.", "warning");
     }
 }
 
@@ -66,6 +69,10 @@ async function logoutHOD() {
     const confirmed = await askConfirm("HOD Secure Logout", "Are you sure you want to end your active administrative command session and log out?");
     if (confirmed) {
         uiState.isHODAuthenticated = false;
+        uiState.hodLoggedInEmail = null;
+        uiState.hodLoggedInName = null;
+        const nameEl = document.getElementById('hod-logged-in-name');
+        if (nameEl) nameEl.textContent = '-';
         switchTab('register');
         renderToast("Logged out of HOD Control Center.", "success");
         logSystemEmail("Administrator Session", "System Security", "Administrative command session ended.");

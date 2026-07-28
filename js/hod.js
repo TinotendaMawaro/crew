@@ -71,6 +71,44 @@ function closeReceiptModal() {
     modal.classList.add('hidden');
 }
 
+/* ---- Profile modal ---- */
+function openProfileModal(index) {
+    uiState.profileViewingIndex = index;
+    const member = registeredCrew[index];
+    if (!member) return;
+    document.getElementById('profile-fullname').textContent = member.fullname;
+    document.getElementById('profile-phone').textContent = member.phone;
+    document.getElementById('profile-email').textContent = member.email;
+    document.getElementById('profile-history').textContent = member.history;
+    document.getElementById('profile-area').textContent = member.area;
+    document.getElementById('profile-section').textContent = member.section;
+    document.getElementById('profile-gadget').textContent = member.gadget;
+    document.getElementById('profile-serial').textContent = member.serial ? `S/N: ${member.serial}` : '';
+    document.getElementById('profile-status').textContent = member.status;
+    document.getElementById('profile-regalia').textContent = member.has_regalia ? 'Owns Uniform' : `Requested Size ${member.regalia_size || 'N/A'}`;
+
+    const receiptCell = document.getElementById('profile-receipt-cell');
+    if (member.regalia_receipt_url) {
+        receiptCell.innerHTML = `<button onclick="viewReceipt('${member.regalia_receipt_url}')" class="text-brand-gold hover:text-white transition"><i class="fa-solid fa-file-image mr-1"></i> View Receipt</button>`;
+    } else {
+        receiptCell.innerHTML = '<span class="text-[10px] text-gray-600">None uploaded</span>';
+    }
+
+    document.getElementById('profile-modal').classList.remove('hidden');
+}
+
+function closeProfileModal() {
+    document.getElementById('profile-modal').classList.add('hidden');
+}
+
+function emailUserFromProfile() {
+    const member = registeredCrew[uiState.profileViewingIndex];
+    if (!member) return;
+    const subject = encodeURIComponent(`CTF 2026 Media - ${member.serving_no}`);
+    const body = encodeURIComponent(`Dear ${member.fullname},\n\n`);
+    window.location.href = `mailto:${member.email}?subject=${subject}&body=${body}`;
+}
+
 /* ---- Reassign modal ---- */
 function updateReassignSections() {
     const areaVal = document.getElementById('reassign-area').value;

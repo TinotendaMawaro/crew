@@ -12,18 +12,20 @@ function renderCrewRow(member, index) {
         badgeStyle = "bg-red-500/10 text-red-400 border-red-500/20";
     }
 
-    const regaliaCell = member.hasRegalia
+    const regaliaCell = member.has_regalia
         ? '<span class="text-green-400 text-xs">Yes</span>'
-        : `<span class="text-brand-gold font-mono">${member.regaliaSize}</span>`;
+        : `<span class="text-brand-gold font-mono">${member.regalia_size}</span>`;
 
-    const receiptCell = member.regaliaReceiptUrl
-        ? `<button onclick="viewReceipt('${member.regaliaReceiptUrl}')" class="h-8 w-8 rounded-lg bg-brand-gold/10 border border-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black transition" title="View Receipt"><i class="fa-solid fa-file-image"></i></button>`
+    const receiptCell = member.regalia_receipt_url
+        ? `<button onclick="viewReceipt('${member.regalia_receipt_url}')" class="h-8 w-8 rounded-lg bg-brand-gold/10 border border-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black transition" title="View Receipt"><i class="fa-solid fa-file-image"></i></button>`
         : '<span class="text-[10px] text-gray-600">None</span>';
+
+    const profileCell = `<button onclick="openProfileModal(${index})" class="h-8 w-8 rounded-lg bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan hover:bg-brand-cyan hover:text-black transition" title="View Profile"><i class="fa-solid fa-user"></i></button>`;
 
     return `
         <tr class="hover:bg-white/[0.02] border-b border-brand-gold/10 transition">
             <td class="py-4 px-4">
-                <span class="block text-brand-gold font-mono text-xs font-bold text-glow-gold">${member.servingNo}</span>
+                <span class="block text-brand-gold font-mono text-xs font-bold text-glow-gold">${member.serving_no}</span>
                 <span class="block text-white font-semibold text-xs mt-0.5">${member.fullname}</span>
             </td>
             <td class="py-4 px-4 text-xs">
@@ -41,13 +43,16 @@ function renderCrewRow(member, index) {
             <td class="py-4 px-4 text-xs font-bold text-center">
                 ${regaliaCell}
             </td>
-            <td class="py-4 px-4 text-center">
-                ${receiptCell}
-            </td>
             <td class="py-4 px-4">
                 <span class="px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider ${badgeStyle}">
                     ${member.status}
                 </span>
+            </td>
+            <td class="py-4 px-4 text-center">
+                ${receiptCell}
+            </td>
+            <td class="py-4 px-4 text-center">
+                ${profileCell}
             </td>
             <td class="py-4 px-4">
                 <div class="flex items-center justify-center gap-2">

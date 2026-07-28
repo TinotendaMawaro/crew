@@ -536,7 +536,7 @@
                     <div class="flex flex-wrap items-center gap-3">
                         <div class="flex items-center gap-3 bg-brand-carbonDark/90 px-4 py-2.5 rounded-2xl border border-brand-gold/30 text-xs text-gray-300 shadow-lg">
                             <span class="h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-                            <span>Lead Mode: <strong class="text-brand-gold font-mono">HOD Media Administrator</strong></span>
+                            <span>Logged in as: <strong class="text-brand-gold font-mono" id="hod-logged-in-name">-</strong></span>
                         </div>
                         <button onclick="logoutHOD()" class="px-4 py-2.5 rounded-2xl bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white border border-red-500/30 transition duration-300 flex items-center gap-2 text-xs font-bold shadow-lg">
                             <i class="fa-solid fa-right-from-bracket"></i> Logout
@@ -586,6 +586,7 @@
                                     <th class="py-3 px-4 text-center">Regalia Size</th>
                                     <th class="py-3 px-4">Clearance Status</th>
                                     <th class="py-3 px-4 text-center">Receipt</th>
+                                    <th class="py-3 px-4 text-center">Profile</th>
                                     <th class="py-3 px-4 text-center">Command Actions</th>
                                 </tr>
                             </thead>
@@ -683,6 +684,70 @@
             </div>
         </div>
     </div>
+    <!-- CUSTOM MODAL: USER PROFILE -->
+    <div id="profile-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+        <div class="glassmorphism-hod rounded-3xl p-4 sm:p-6 max-w-2xl w-full border border-brand-gold/40 space-y-5 shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+            <div class="flex items-center justify-between pb-3 border-b border-brand-gold/20">
+                <h3 class="text-base font-bold font-serif text-white flex items-center gap-2 text-glow-gold">
+                    <i class="fa-solid fa-id-card text-brand-gold"></i> Crew Member Profile
+                </h3>
+                <button onclick="closeProfileModal()" class="text-gray-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Full Name</span>
+                    <span id="profile-fullname" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Contact Number</span>
+                    <span id="profile-phone" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Email</span>
+                    <span id="profile-email" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Registration Type</span>
+                    <span id="profile-history" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Area / Department</span>
+                    <span id="profile-area" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Section / Role</span>
+                    <span id="profile-section" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Equipment</span>
+                    <span id="profile-gadget" class="text-white font-semibold text-sm"></span>
+                    <span id="profile-serial" class="text-[10px] text-gray-400 font-mono block mt-0.5"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Status</span>
+                    <span id="profile-status" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Regalia Size</span>
+                    <span id="profile-regalia" class="text-white font-semibold text-sm"></span>
+                </div>
+                <div class="bg-brand-carbonDark/80 p-3 rounded-xl border border-brand-gold/10">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Receipt</span>
+                    <span id="profile-receipt-cell" class="text-sm"></span>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-3 pt-3 border-t border-brand-gold/10">
+                <button onclick="emailUserFromProfile()" class="px-5 py-2.5 rounded-full text-xs font-bold bg-brand-cyan text-black hover:bg-brand-cyanLight transition shadow-[0_0_12px_rgba(6,182,212,0.4)] flex items-center gap-2">
+                    <i class="fa-solid fa-envelope"></i> Email User
+                </button>
+                <button onclick="closeProfileModal()" class="px-5 py-2.5 rounded-full text-xs font-bold bg-white/5 text-white border border-white/10 hover:bg-white/10 transition">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
     <!-- CUSTOM MODAL: HOD SECURED EMAIL PROMPT -->
     <div id="hod-auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
         <div class="glassmorphism-hod rounded-3xl p-6 sm:p-8 max-w-md w-full border border-brand-gold/40 space-y-6 shadow-[0_0_45px_rgba(245,158,11,0.35)]">
@@ -697,7 +762,7 @@
 
             <form onsubmit="submitHODEmail(event)" class="space-y-4">
                 <p class="text-xs text-gray-300 leading-relaxed">
-                    To access the command dashboard, please enter your registered administrative email address below.
+                    Restricted access. Enter your authorized administrative email address to continue.
                 </p>
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2" for="hod-auth-email">Admin Email Address</label>
