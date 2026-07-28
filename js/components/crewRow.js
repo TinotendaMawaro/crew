@@ -24,37 +24,37 @@ function renderCrewRow(member, index) {
 
     return `
         <tr class="hover:bg-white/[0.02] border-b border-brand-gold/10 transition">
-            <td class="py-4 px-4">
+            <td class="py-4 px-4" data-label="Serving No / Name">
                 <span class="block text-brand-gold font-mono text-xs font-bold text-glow-gold">${member.serving_no}</span>
                 <span class="block text-white font-semibold text-xs mt-0.5">${member.fullname}</span>
             </td>
-            <td class="py-4 px-4 text-xs">
+            <td class="py-4 px-4 text-xs" data-label="Contact">
                 <span class="block text-gray-300">${member.phone}</span>
                 <span class="block text-[10px] text-gray-500 mt-0.5">Exp: ${member.history}</span>
             </td>
-            <td class="py-4 px-4">
+            <td class="py-4 px-4" data-label="Sector">
                 <span class="block text-white text-xs">${member.area}</span>
                 <span class="block text-[10px] text-gray-400 mt-0.5">${member.section}</span>
             </td>
-            <td class="py-4 px-4">
+            <td class="py-4 px-4" data-label="Gadget">
                 <span class="block text-white text-xs">${member.gadget}</span>
                 <span class="block text-[10px] text-gray-500 mt-0.5 font-mono">S/N: ${member.serial}</span>
             </td>
-            <td class="py-4 px-4 text-xs font-bold text-center">
+            <td class="py-4 px-4 text-xs font-bold text-center" data-label="Regalia">
                 ${regaliaCell}
             </td>
-            <td class="py-4 px-4">
+            <td class="py-4 px-4" data-label="Status">
                 <span class="px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider ${badgeStyle}">
                     ${member.status}
                 </span>
             </td>
-            <td class="py-4 px-4 text-center">
+            <td class="py-4 px-4 text-center" data-label="Receipt">
                 ${receiptCell}
             </td>
-            <td class="py-4 px-4 text-center">
+            <td class="py-4 px-4 text-center" data-label="Profile">
                 ${profileCell}
             </td>
-            <td class="py-4 px-4">
+            <td class="py-4 px-4" data-label="Actions">
                 <div class="flex items-center justify-center gap-2">
                     <button onclick="approveCrew(${index})" class="h-8 w-8 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 hover:bg-green-500 hover:text-black transition" title="Approve Server">
                         <i class="fa-solid fa-check"></i>

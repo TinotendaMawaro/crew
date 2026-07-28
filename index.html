@@ -60,6 +60,8 @@
 
     <!-- ROTATING WORLD GLOBE BACKGROUND -->
     <canvas id="globe-canvas"></canvas>
+    <!-- PARTICLE BACKGROUND -->
+    <canvas id="particles-canvas"></canvas>
 
     <!-- APP LOADING SPINNER (shown on init/reload, removed when ready) -->
     <div id="app-loader" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-brand-darkSpace">
@@ -545,7 +547,7 @@
                 </div>
 
                 <!-- Analytical KPI Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 kpi-grid-mobile">
                     <div class="bg-brand-carbonDark/80 p-4 rounded-2xl border border-brand-gold/20 shadow-[inset_0_0_10px_rgba(245,158,11,0.05)]">
                         <span class="text-[10px] text-gray-400 uppercase block tracking-wider font-semibold">Total Crew registered</span>
                         <span class="text-2xl font-extrabold text-brand-gold font-mono block mt-1 text-glow-gold" id="kpi-total">4</span>
@@ -576,18 +578,18 @@
                     </div>
 
                     <div class="overflow-x-auto rounded-2xl border border-brand-gold/20 bg-brand-carbonDark/60 custom-scrollbar shadow-xl">
-                        <table class="w-full text-left text-xs text-gray-300 min-w-[800px]">
+                        <table class="w-full text-left text-xs text-gray-300 min-w-[800px] mobile-card-table">
                             <thead class="bg-brand-carbonDark text-[10px] text-brand-gold font-bold uppercase tracking-wider border-b border-brand-gold/30">
                                 <tr>
-                                    <th class="py-3 px-4">Serving No. / Name</th>
-                                    <th class="py-3 px-4">Contact Detail</th>
-                                    <th class="py-3 px-4">Assigned Sector</th>
-                                    <th class="py-3 px-4">Gadget & S/N</th>
-                                    <th class="py-3 px-4 text-center">Regalia Size</th>
-                                    <th class="py-3 px-4">Clearance Status</th>
-                                    <th class="py-3 px-4 text-center">Receipt</th>
-                                    <th class="py-3 px-4 text-center">Profile</th>
-                                    <th class="py-3 px-4 text-center">Command Actions</th>
+                                    <th class="py-3 px-4" data-label="Serving No / Name">Serving No. / Name</th>
+                                    <th class="py-3 px-4" data-label="Contact">Contact Detail</th>
+                                    <th class="py-3 px-4" data-label="Sector">Assigned Sector</th>
+                                    <th class="py-3 px-4" data-label="Gadget">Gadget & S/N</th>
+                                    <th class="py-3 px-4 text-center" data-label="Regalia">Regalia Size</th>
+                                    <th class="py-3 px-4" data-label="Status">Clearance Status</th>
+                                    <th class="py-3 px-4 text-center" data-label="Receipt">Receipt</th>
+                                    <th class="py-3 px-4 text-center" data-label="Profile">Profile</th>
+                                    <th class="py-3 px-4 text-center" data-label="Actions">Command Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="admin-table-body" class="divide-y divide-brand-gold/10">
@@ -842,7 +844,7 @@
     </div>
 
     <!-- FIXED FLOATING WIDGETS -->
-    <div class="fixed bottom-6 right-4 sm:right-8 z-40 flex items-center space-x-4">
+    <div class="fixed-floater fixed bottom-6 right-4 sm:right-8 z-40 flex items-center space-x-4">
         <a href="https://wa.me/263772719284?text=Hi%20Robin,%20I%2527m%20having%20trouble%20with%20my%20CTF%202026%20registration." target="_blank" class="h-14 w-14 bg-green-500 hover:bg-green-600 hover:shadow-[0_0_20px_rgba(34,197,94,0.6)] text-black text-2xl rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 relative group" title="WhatsApp Coordinator">
             <i class="fa-brands fa-whatsapp font-bold animate-pulse"></i>
             <span class="absolute -top-12 right-0 bg-brand-darkSpace text-white text-[10px] px-2 py-1 rounded border border-brand-indigo/30 opacity-0 group-hover:opacity-100 transition whitespace-nowrap shadow-md">WhatsApp Admin</span>
@@ -883,6 +885,7 @@
     <script src="js/chatbot.js"></script>
     <script src="js/countdown.js"></script>
     <script src="js/globe.js"></script>
+    <script src="js/particles.js"></script>
     <!-- Bootstrap last -->
     <script src="js/main.js"></script>
 </body>

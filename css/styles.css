@@ -3,7 +3,29 @@
    Theme: User Space Glow (indigo/cyan) + HOD Royal Gold (velvet/amber)
    ===================================================================== */
 
-/* Custom Scrollbar (color driven by --scroll-color for theme switching) */
+/* Particle Background Canvas */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+/* ==================== ROTATING GLOBE BACKGROUND ==================== */
+#globe-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.35;
+}
 .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -197,16 +219,107 @@ span[class*="rounded-full"],
     animation: toastSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ==================== ROTATING GLOBE BACKGROUND ==================== */
-#globe-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.35;
+/* ===== GLOBAL MOBILE SAFEGUARDS ===== */
+@media (max-width: 640px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* Compact navigation */
+    #nav-bar {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+    #nav-bar > div:first-child img {
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+    #nav-bar button {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    /* Hero cards */
+    .glassmorphism-user,
+    .glassmorphism-hod {
+        border-radius: 1.25rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Tables -> card stack on mobile */
+    .mobile-card-table thead {
+        display: none;
+    }
+    .mobile-card-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .mobile-card-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        border: 1px solid rgba(245, 158, 11, 0.15);
+        border-radius: 0.75rem;
+        padding: 0.75rem;
+    }
+    .mobile-card-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.35rem 0;
+        border: none;
+    }
+    .mobile-card-table tbody td::before {
+        content: attr(data-label);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #9ca3af;
+        font-weight: 700;
+    }
+
+    /* KPI grid becomes 2x2 */
+    .kpi-grid-mobile {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Modals avoid viewport overflow */
+    #chatbot-window {
+        height: 60vh;
+        width: calc(100vw - 2rem);
+        right: 1rem !important;
+        bottom: 5rem !important;
+    }
+    #receipt-modal img,
+    #profile-modal .max-w-2xl {
+        max-width: 100% !important;
+    }
+
+    /* Floating action buttons */
+    .fixed-floater {
+        right: 1rem !important;
+    }
+    .fixed-floater button,
+    .fixed-floater a {
+        height: 3rem !important;
+        width: 3rem !important;
+    }
+}
+
+/* ============= DARK LIGHT PROTECTIONS ============= */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* Pulsing ring behind logo */
@@ -260,4 +373,80 @@ tbody tr:hover {
 .modal-backdrop {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+}
+
+/* Panel/Card compaction on small screens */
+@media (max-width: 640px) {
+    .glassmorphism-user,
+    .glassmorphism-hod {
+        border-radius: 1.25rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .glassmorphism-user .p-6,
+    .glassmorphism-hod .p-6 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* KPI responsiveness */
+@media (max-width: 640px) {
+    .kpi-grid-mobile {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Table card view for mobile */
+@media (max-width: 640px) {
+    .mobile-card-table thead {
+        display: none;
+    }
+    .mobile-card-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .mobile-card-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        border: 1px solid rgba(245, 158, 11, 0.15);
+        border-radius: 0.75rem;
+        padding: 0.75rem;
+        background: rgba(11, 15, 23, 0.6);
+    }
+    .mobile-card-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.3rem 0;
+        border: none;
+        text-align: right;
+    }
+    .mobile-card-table tbody td::before {
+        content: attr(data-label);
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #9ca3af;
+        font-weight: 700;
+        margin-right: 0.5rem;
+    }
+    .mobile-card-table tbody td[data-label="Actions"] {
+        justify-content: flex-end;
+    }
+}
+
+/* Floating widgets safe-area */
+@media (max-width: 640px) {
+    .fixed-floater {
+        right: 0.75rem !important;
+        bottom: 0.75rem !important;
+    }
+    .fixed-floater button,
+    .fixed-floater a {
+        height: 2.75rem !important;
+        width: 2.75rem !important;
+    }
 }
