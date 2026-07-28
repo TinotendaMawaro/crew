@@ -14,11 +14,12 @@ const CREW_TABLE = "crew_registrations";
 /* Sector definitions used by registration + HOD reassign flows */
 const sectionsData = {
     "Visual Production": [
-        "Main Camera Operator",
-        "Live Switcher Operator",
-        "Crane Cameraman",
-        "NDI Network Engineer",
-        "Projection Specialist"
+        "VIDEOGRAPHY",
+        "PHOTOGRAPHY",
+        "LIVE STREAMING",
+        "SWITCHER",
+        "SCREENS",
+        "PROJECTION"
     ],
     "Audio Engineering": [
         "FOH Audio Engineer",
@@ -36,6 +37,10 @@ const sectionsData = {
         "Lighting Designer / Console Op",
         "Rigging Technician",
         "Stage Assistant"
+    ],
+    "IT Support": [
+        "NETWORKING",
+        "IT SUPPORT"
     ]
 };
 

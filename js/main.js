@@ -15,7 +15,7 @@ function dismissAppLoader() {
 window.addEventListener('DOMContentLoaded', () => {
     initPWA();
     initSupabase();
-    updateServingSections();
+    initSectionDependency();
     runCountdown();
     setInterval(runCountdown, 1000);
 

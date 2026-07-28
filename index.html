@@ -209,6 +209,13 @@
                                     </div>
                                 </div>
                                 <div>
+                                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2" for="email">Email Address <span class="text-brand-cyan">*</span></label>
+                                    <div class="relative max-w-md">
+                                        <i class="fa-solid fa-envelope absolute left-4 top-3.5 text-brand-indigo text-sm"></i>
+                                        <input type="email" id="email" placeholder="john@heartfelt.org" required class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan focus:shadow-[0_0_12px_rgba(6,182,212,0.3)] rounded-xl py-3 pl-12 pr-4 text-white text-sm outline-none transition duration-300">
+                                    </div>
+                                </div>
+                                <div>
                                     <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2" for="serving-history">History of Serving in HIM Media <span class="text-brand-cyan">*</span></label>
                                     <div class="relative">
                                         <i class="fa-solid fa-history absolute left-4 top-3.5 text-brand-indigo text-sm"></i>
@@ -234,7 +241,7 @@
                                         <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2" for="serving-area">Area of Serving <span class="text-brand-cyan">*</span></label>
                                         <div class="relative">
                                             <i class="fa-solid fa-video absolute left-4 top-3.5 text-brand-indigo text-sm"></i>
-                                            <select id="serving-area" onchange="updateServingSections()" required class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan focus:shadow-[0_0_12px_rgba(6,182,212,0.3)] rounded-xl py-3 pl-12 pr-4 text-white text-sm outline-none transition duration-300 appearance-none">
+                                            <select id="serving-area" required class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan focus:shadow-[0_0_12px_rgba(6,182,212,0.3)] rounded-xl py-3 pl-12 pr-4 text-white text-sm outline-none transition duration-300 appearance-none">
                                                 <option value="" disabled selected>Select Primary Area</option>
                                                 <option value="Visual Production">Visual Production</option>
                                                 <option value="Audio Engineering">Audio Engineering</option>
@@ -248,27 +255,32 @@
                                         <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2" for="serving-section">Assigned Section <span class="text-brand-cyan">*</span></label>
                                         <div class="relative">
                                             <i class="fa-solid fa-layer-group absolute left-4 top-3.5 text-brand-indigo text-sm"></i>
-                                            <select id="serving-section" required class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan focus:shadow-[0_0_12px_rgba(6,182,212,0.3)] rounded-xl py-3 pl-12 pr-4 text-white text-sm outline-none transition duration-300 appearance-none">
+                                            <select id="serving-section" required aria-required="true" aria-label="Assigned Section" aria-describedby="serving-section-desc" role="listbox" class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan focus:shadow-[0_0_12px_rgba(6,182,212,0.3)] rounded-xl py-3 pl-12 pr-4 text-white text-sm outline-none transition duration-300 appearance-none">
                                                 <option value="" disabled selected>Select Section</option>
+                                                <option value="VIDEOGRAPHY">Videography</option>
+                                                <option value="PHOTOGRAPHY">Photography</option>
+                                                <option value="NETWORKING">Networking</option>
+                                                <option value="IT SUPPORT">IT Support</option>i
+                                                <option value="PROJECTION">Projection</option>
+                                                <option value="LIVE STREAMING">Live Streaming</option>
+                                                <option value="SCREENS">Screens</option>
+                                                <option value="SWITCHER">Switcher</option>
                                             </select>
-                                            <i class="fa-solid fa-chevron-down absolute right-4 top-4 text-brand-indigo pointer-events-none text-xs"></i>
+                                            <i class="fa-solid fa-chevron-down absolute right-4 top-4 text-brand-indigo pointer-events-none text-xs" aria-hidden="true"></i>
                                         </div>
+                                        <span id="serving-section-desc" class="sr-only">Section options update based on your chosen Area of Serving.</span>
                                     </div>
                                 </div>
 
                                 <!-- GADGET REGISTRATION CARD -->
                                 <div class="bg-brand-slateDark/80 border border-brand-indigo/30 p-5 rounded-2xl space-y-4 shadow-[0_0_15px_rgba(99,102,241,0.1)]">
                                     <h4 class="text-xs font-bold text-brand-cyan uppercase tracking-widest flex items-center gap-2">
-                                        <i class="fa-solid fa-camera"></i> Gadget & Equipment Verification
+                                        <i class="fa-solid fa-camera"></i> Specify your contribution and equipment
                                     </h4>
-                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1" for="gadget-type">Gadget Type</label>
-                                            <input type="text" id="gadget-type" placeholder="e.g., DSLR, Laptop, Mixer" required class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan rounded-xl py-2 px-3 text-white text-xs outline-none transition duration-300">
-                                        </div>
-                                        <div>
-                                            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1" for="gadget-model">Model Name</label>
-                                            <input type="text" id="gadget-model" placeholder="e.g., Sony A7IV, MacBook Pro" required class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan rounded-xl py-2 px-3 text-white text-xs outline-none transition duration-300">
+                                            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1" for="gadget">Gadget / Device</label>
+                                            <input type="text" id="gadget" placeholder="e.g., Sony A7IV Camera, MacBook Pro" required class="w-full bg-brand-darkSpace/60 border border-brand-indigo/30 focus:border-brand-cyan rounded-xl py-2 px-3 text-white text-xs outline-none transition duration-300">
                                         </div>
                                         <div>
                                             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1" for="gadget-serial">Serial Number</label>
@@ -394,11 +406,11 @@
                                         <span class="block text-[10px] text-gray-400 uppercase tracking-widest mt-1">Unique Serving Code</span>
                                     </div>
 
-                                    <div class="w-44 h-44 bg-white p-2.5 rounded-2xl shadow-2xl border-4 border-brand-indigo/45 relative flex items-center justify-center">
-                                        <img src="CTF (1).png" alt="CTF Registered QR" class="w-full h-full object-contain">
+                                    <div class="w-40 h-40 mx-auto rounded-full border-4 border-brand-indigo/50 bg-white/90 shadow-[0_0_30px_rgba(99,102,241,0.35)] flex items-center justify-center mb-4 overflow-hidden">
+                                        <img src="assets/images/overflow logo (2).png" alt="Overflow Connections" class="w-full h-full object-contain p-2">
                                     </div>
 
-                                    <div class="mt-4 space-y-1">
+                                    <div class="space-y-1">
                                         <h4 id="ticket-fullname" class="text-base font-bold text-white">Jonathan Miller</h4>
                                         <p class="text-xs text-brand-cyan font-medium" id="ticket-serving-section">Visual Production &bull; Cam Op</p>
                                         <p class="text-[10px] text-gray-400" id="ticket-gadget-details">Sony FX3 - S/N 932014-G</p>
@@ -630,6 +642,7 @@
                         <option value="Audio Engineering">Audio Engineering</option>
                         <option value="Social Media & PR">Social Media & PR</option>
                         <option value="Lighting & Stage FX">Lighting & Stage FX</option>
+                        <option value="IT Support">IT Support</option>
                     </select>
                 </div>
                 <div>

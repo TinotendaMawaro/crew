@@ -60,6 +60,49 @@ async function insertCrew(record) {
     return data;
 }
 
+/* Check whether an email already exists in the crew registry. */
+async function isEmailRegistered(email) {
+    if (!supabaseReady) return false;
+    const { data, error } = await supabaseClient
+        .from(CREW_TABLE)
+        .select('id')
+        .eq('email', email)
+        .limit(1);
+
+    if (error) {
+        console.error('isEmailRegistered error:', error);
+        return false;
+    }
+    return (data && data.length > 0) ? true : false;
+}
+
+/* Upload a file to the receipts storage bucket and return its public URL. */
+async function uploadRegaliaReceipt(file) {
+    if (!supabaseReady || !file) return null;
+    const ext = file.name.split('.').pop();
+    const path = `regalia/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const { data, error } = await supabaseClient
+        .storage
+        .from('receipts')
+        .upload(path, file, {
+            cacheControl: '3600',
+            upsert: false
+        });
+
+    if (error) {
+        console.error('uploadRegaliaReceipt error:', error);
+        renderToast('Receipt upload failed. You can still register without it.', 'warning');
+        return null;
+    }
+
+    const { data: publicData } = supabaseClient
+        .storage
+        .from('receipts')
+        .getPublicUrl(path);
+
+    return publicData ? publicData.publicUrl : null;
+}
+
 /* Update a single field on a record by id */
 async function updateCrewField(id, field, value) {
     if (!supabaseReady) {
