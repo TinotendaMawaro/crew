@@ -87,6 +87,15 @@ function openProfileModal(index) {
     document.getElementById('profile-status').textContent = member.status;
     document.getElementById('profile-regalia').textContent = member.has_regalia ? 'Owns Uniform' : `Requested Size ${member.regalia_size || 'N/A'}`;
 
+    const paymentCell = document.getElementById('profile-payment');
+    if (member.payment_method && member.payment_method !== 'N/A') {
+        paymentCell.textContent = member.payment_method;
+        paymentCell.className = 'text-white font-semibold text-sm';
+    } else {
+        paymentCell.textContent = 'N/A';
+        paymentCell.className = 'text-gray-600 font-semibold text-sm';
+    }
+
     const receiptCell = document.getElementById('profile-receipt-cell');
     if (member.regalia_receipt_url) {
         receiptCell.innerHTML = `<button onclick="viewReceipt('${member.regalia_receipt_url}')" class="text-brand-gold hover:text-white transition"><i class="fa-solid fa-file-image mr-1"></i> View Receipt</button>`;

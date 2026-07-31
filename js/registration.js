@@ -72,25 +72,29 @@ function validateStep(step) {
     } else if (step === 2) {
         const area = document.getElementById('serving-area').value;
         const sect = document.getElementById('serving-section').value;
-        const gadget = document.getElementById('gadget').value.trim();
-        const serial = document.getElementById('gadget-serial').value.trim();
         const transport = document.querySelector('input[name="transport"]:checked');
 
-        if (!area || !sect || !gadget || !serial || !transport) {
-            renderToast("Please declare serving sectors, device details, and transport.", "warning");
+        if (!area || !sect || !transport) {
+            renderToast("Please declare serving sectors and transport.", "warning");
             return false;
         }
     } else if (step === 3) {
         if (!uiState.selectedRegaliaChoice) {
             const size = document.getElementById('regalia-size').value;
-            const pRef = document.getElementById('payment-reference').value.trim();
-            if (!size || !pRef) {
-                renderToast("Please declare your size and exact EcoCash transaction code.", "warning");
+            if (!size) {
+                renderToast("Please declare your needed item size.", "warning");
                 return false;
             }
-            if (!selectedPopFile) {
-                renderToast("Please upload your Proof of Payment receipt.", "warning");
-                return false;
+            if (uiState.selectedPaymentMethod === 'ecocash') {
+                const pRef = document.getElementById('payment-reference').value.trim();
+                if (!pRef) {
+                    renderToast("Please provide your EcoCash transaction reference.", "warning");
+                    return false;
+                }
+                if (!selectedPopFile) {
+                    renderToast("Please upload your Proof of Payment receipt.", "warning");
+                    return false;
+                }
             }
         }
     }
@@ -142,6 +146,28 @@ function selectRegalia(hasIt) {
         yes.className = "py-3 px-4 rounded-xl border border-white/10 bg-brand-darkSpace/60 text-sm font-bold hover:border-brand-cyan transition duration-300 flex items-center justify-center gap-2";
         no.className = "py-3 px-4 rounded-xl border-2 border-brand-cyan bg-brand-cyan/25 text-sm font-bold text-white shadow-[0_0_15px_rgba(6,182,212,0.3)] transition duration-300 flex items-center justify-center gap-2";
         panel.classList.remove('hidden');
+        selectPaymentMethod('ecocash');
+    }
+}
+
+/* Payment method toggle within the regalia panel */
+function selectPaymentMethod(method) {
+    uiState.selectedPaymentMethod = method;
+    const ecocashBtn = document.getElementById('pay-ecocash');
+    const cashBtn = document.getElementById('pay-cash');
+    const ecocashSection = document.getElementById('ecocash-section');
+    const cashSection = document.getElementById('cash-section');
+
+    if (method === 'ecocash') {
+        ecocashBtn.className = "py-3 px-4 rounded-xl border-2 border-brand-cyan bg-brand-cyan/25 text-sm font-bold text-white shadow-[0_0_15px_rgba(6,182,212,0.3)] transition duration-300 flex items-center justify-center gap-2";
+        cashBtn.className = "py-3 px-4 rounded-xl border border-white/10 bg-brand-darkSpace/60 text-sm font-bold hover:border-brand-cyan transition duration-300 flex items-center justify-center gap-2";
+        ecocashSection.classList.remove('hidden');
+        cashSection.classList.add('hidden');
+    } else {
+        ecocashBtn.className = "py-3 px-4 rounded-xl border border-white/10 bg-brand-darkSpace/60 text-sm font-bold hover:border-brand-cyan transition duration-300 flex items-center justify-center gap-2";
+        cashBtn.className = "py-3 px-4 rounded-xl border-2 border-green-500 bg-green-500/25 text-sm font-bold text-white shadow-[0_0_15px_rgba(34,197,94,0.3)] transition duration-300 flex items-center justify-center gap-2";
+        ecocashSection.classList.add('hidden');
+        cashSection.classList.remove('hidden');
     }
 }
 
@@ -182,6 +208,7 @@ async function handleFormSubmission(e) {
     const transport = document.querySelector('input[name="transport"]:checked').value;
     const regaliaSize = uiState.selectedRegaliaChoice ? "N/A" : document.getElementById('regalia-size').value;
     const paymentRef = uiState.selectedRegaliaChoice ? "N/A" : document.getElementById('payment-reference').value.trim();
+    const paymentMethod = uiState.selectedRegaliaChoice ? "N/A" : (uiState.selectedPaymentMethod === 'ecocash' ? 'EcoCash' : 'Cash on Ground');
 
     // Server-side email uniqueness check
     const emailExists = await isEmailRegistered(email);
@@ -210,6 +237,7 @@ async function handleFormSubmission(e) {
         transport,
         has_regalia: uiState.selectedRegaliaChoice,
         regalia_size: regaliaSize,
+        payment_method: paymentMethod,
         payment_ref: paymentRef,
         regalia_receipt_url: receiptUrl,
         status: "Pending",
@@ -232,6 +260,7 @@ async function handleFormSubmission(e) {
     document.getElementById('ticket-gadget-details').textContent = `${gadget} - S/N ${serial}`;
     document.getElementById('ticket-regalia').textContent = uiState.selectedRegaliaChoice ? "Owns Uniform" : `Ordered Size ${regaliaSize}`;
     document.getElementById('ticket-transport').textContent = transport === 'need' ? "Bus Requested" : "Provides Ride";
+    document.getElementById('ticket-payment').textContent = paymentMethod === 'N/A' ? "N/A" : paymentMethod;
 
     logSystemEmail(fullname, area, "System Validation Sent");
 
@@ -266,6 +295,7 @@ function resetForm() {
     document.getElementById('navigation-controls').classList.remove('hidden');
     uiState.currentStep = 1;
     uiState.selectedRegaliaChoice = true;
+    uiState.selectedPaymentMethod = 'ecocash';
     selectedPopFile = null;
     const popText = document.getElementById('pop-upload-text');
     if (popText) popText.textContent = 'Click to upload EcoCash receipt screenshot';

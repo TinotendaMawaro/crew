@@ -17,8 +17,8 @@ const sectionsData = {
         "VIDEOGRAPHY",
         "PHOTOGRAPHY",
         "LIVE STREAMING",
-        "SWITCHER",
-        "SCREENS",
+        "Logistics",
+        "Networking",
         "PROJECTION"
     ],
     "Audio Engineering": [
@@ -60,6 +60,7 @@ const HOD_EMAIL_ALLOWLIST = HOD_ACCOUNTS.map(account => account.email);
 const uiState = {
     currentStep: 1,
     selectedRegaliaChoice: true,
+    selectedPaymentMethod: 'ecocash',
     currentEditingIndex: -1,
     profileViewingIndex: -1,
     isHODAuthenticated: false,
