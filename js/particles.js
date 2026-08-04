@@ -15,8 +15,9 @@
     let animationId;
     let isGoldTheme = false;
 
-    const PARTICLE_COUNT = 70;
+    const PARTICLE_COUNT = window.innerWidth < 640 ? 25 : 70;
     const MAX_SPEED = 0.4;
+    const isMobile = window.innerWidth < 640;
 
     class Particle {
         constructor() {
@@ -71,6 +72,14 @@
     }
 
     function animate() {
+        if (isMobile) {
+            ctx.clearRect(0, 0, width, height);
+            for (const p of particles) {
+                p.update();
+                p.draw();
+            }
+            return;
+        }
         ctx.clearRect(0, 0, width, height);
         for (const p of particles) {
             p.update();

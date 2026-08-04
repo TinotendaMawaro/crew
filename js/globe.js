@@ -16,8 +16,9 @@
     let isGoldTheme = false;
 
     const GLOBE_ROTATION_SPEED = 0.003;
-    const LINE_COUNT = 18;
-    const DOT_COUNT = 120;
+    const LINE_COUNT = window.innerWidth < 640 ? 8 : 18;
+    const DOT_COUNT = window.innerWidth < 640 ? 40 : 120;
+    const isMobile = window.innerWidth < 640;
 
     function resize() {
         width = window.innerWidth;
@@ -161,6 +162,10 @@
     }
 
     function animate() {
+        if (isMobile) {
+            drawGlobe();
+            return;
+        }
         rotationY += GLOBE_ROTATION_SPEED;
         if (rotationY > Math.PI * 2) rotationY -= Math.PI * 2;
         drawGlobe();
