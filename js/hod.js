@@ -32,10 +32,17 @@ async function approveCrew(index) {
     if (!confirmed) return;
     try {
         await updateCrewField(member.id, 'status', 'Approved');
-        // Refresh local cache from backend so the row reflects the new status
         registeredCrew = await fetchCrew();
         renderToast(`${member.fullname} approved successfully!`, "success");
         logSystemEmail(member.fullname, member.area, "Final Service Authorization Confirmed");
+        sendHODNotification({
+            email: member.email,
+            fullname: member.fullname,
+            type: "approval",
+            area: member.area,
+            section: member.section,
+            servingNo: member.serving_no
+        }).catch(() => {});
         renderAdminTable();
     } catch (_) { /* error already toasted in data layer */ }
 }
@@ -49,6 +56,13 @@ async function declineCrew(index) {
         registeredCrew = await fetchCrew();
         logSystemEmail(member.fullname, "HIM Media Dept", "Service Dismissal Dispatch Sent");
         renderToast("Logs successfully dismissed.", "warning");
+        sendHODNotification({
+            email: member.email,
+            fullname: member.fullname,
+            type: "decline",
+            servingNo: member.serving_no,
+            reason: "Your registration request has been declined by the HOD. Please contact the media department for further details."
+        }).catch(() => {});
         renderAdminTable();
     } catch (_) { /* error already toasted in data layer */ }
 }
@@ -144,12 +158,24 @@ async function confirmReassign() {
     const member = registeredCrew[uiState.currentEditingIndex];
     const targetArea = document.getElementById('reassign-area').value;
     const targetSection = document.getElementById('reassign-section').value;
+    const oldArea = member.area;
+    const oldSection = member.section;
 
     try {
         await reassignCrew(member.id, targetArea, targetSection);
         registeredCrew = await fetchCrew();
         logSystemEmail(member.fullname, targetArea, `Deployment Reassigned to '${targetSection}'`);
         renderToast(`Reassigned successfully! Dispatching notification email to ${member.fullname}.`, "success");
+        sendHODNotification({
+            email: member.email,
+            fullname: member.fullname,
+            type: "reassignment",
+            area: targetArea,
+            section: targetSection,
+            oldArea: oldArea,
+            oldSection: oldSection,
+            servingNo: member.serving_no
+        }).catch(() => {});
         closeReassignModal();
         renderAdminTable();
     } catch (_) { /* error already toasted in data layer */ }

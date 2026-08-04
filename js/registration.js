@@ -321,6 +321,22 @@ async function sendConfirmationEmail({ email, fullname, servingNo, area, section
     logSystemEmail(fullname, area, 'Confirmation email dispatched');
 }
 
+/* Fire-and-forget HOD notification email via Supabase Edge Function */
+async function sendHODNotification({ email, fullname, type, area, section, oldArea, oldSection, servingNo, reason }) {
+    const edgeUrl = `${SUPABASE_URL}/functions/v1/send-hod-notification`;
+    const res = await fetch(edgeUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+        },
+        body: JSON.stringify({ email, fullname, type, area, section, oldArea, oldSection, servingNo, reason })
+    });
+
+    if (!res.ok) throw new Error('HOD notification dispatch failed');
+    logSystemEmail(fullname, area || '', `HOD notification dispatched: ${type}`);
+}
+
 /* Generate and auto-download confirmation ticket as PNG */
 async function downloadConfirmationTicket(servingNo, fullname, area, section) {
     try {
