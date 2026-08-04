@@ -14,12 +14,11 @@ const CREW_TABLE = "crew_registrations";
 /* Sector definitions used by registration + HOD reassign flows */
 const sectionsData = {
     "Visual Production": [
-        "VIDEOGRAPHY",
-        "PHOTOGRAPHY",
-        "LIVE STREAMING",
+        "Videography",
+        "Photography",
+        "Live streaming",
         "Logistics",
-        "Networking",
-        "PROJECTION"
+        "Projection"
     ],
     "Audio Engineering": [
         "FOH Audio Engineer",
@@ -39,9 +38,10 @@ const sectionsData = {
         "Stage Assistant"
     ],
     "IT Support": [
-        "NETWORKING",
-        "IT SUPPORT"
-    ]
+        "Networking",
+        "Software Support",
+        "Hardware Support"
+            ]
 };
 
 /* Crew registry is owned by the Supabase data layer (see js/supabase.js).
@@ -51,7 +51,7 @@ let registeredCrew = [];
 /* HOD authorized account metadata */
 const HOD_ACCOUNTS = [
     { email: 'holyhappy@gmail.com', name: 'Farai Mutsvene' },
-    { email: 'tmawaro@gmail.com', name: 'Tinotenda Mawaro' }
+    { email: 'tmawaro25@gmail.com', name: 'Tinotenda Mawaro' }
 ];
 
 const HOD_EMAIL_ALLOWLIST = HOD_ACCOUNTS.map(account => account.email);

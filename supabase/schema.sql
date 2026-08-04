@@ -14,7 +14,7 @@ create table if not exists public.crew_registrations (
     section text not null,
     gadget text,
     serial text,
-    transport text not null check (transport in ('need', 'provide')),
+    transport text not null check (transport in ('need', 'provide', 'N/A')),
     has_regalia boolean not null default false,
     regalia_size text not null default 'N/A',
     payment_method text not null default 'N/A',

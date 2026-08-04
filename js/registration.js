@@ -72,10 +72,9 @@ function validateStep(step) {
     } else if (step === 2) {
         const area = document.getElementById('serving-area').value;
         const sect = document.getElementById('serving-section').value;
-        const transport = document.querySelector('input[name="transport"]:checked');
 
-        if (!area || !sect || !transport) {
-            renderToast("Please declare serving sectors and transport.", "warning");
+        if (!area || !sect) {
+            renderToast("Please declare serving sectors.", "warning");
             return false;
         }
     } else if (step === 3) {
@@ -205,7 +204,8 @@ async function handleFormSubmission(e) {
     const section = document.getElementById('serving-section').value;
     const gadget = document.getElementById('gadget').value.trim();
     const serial = document.getElementById('gadget-serial').value.trim();
-    const transport = document.querySelector('input[name="transport"]:checked').value;
+    const transportEl = document.querySelector('input[name="transport"]:checked');
+    const transport = transportEl ? transportEl.value : 'N/A';
     const regaliaSize = uiState.selectedRegaliaChoice ? "N/A" : document.getElementById('regalia-size').value;
     const paymentRef = uiState.selectedRegaliaChoice ? "N/A" : document.getElementById('payment-reference').value.trim();
     const paymentMethod = uiState.selectedRegaliaChoice ? "N/A" : (uiState.selectedPaymentMethod === 'ecocash' ? 'EcoCash' : 'Cash on Ground');
@@ -259,7 +259,7 @@ async function handleFormSubmission(e) {
     document.getElementById('ticket-serving-section').textContent = `${area} • ${section}`;
     document.getElementById('ticket-gadget-details').textContent = `${gadget} - S/N ${serial}`;
     document.getElementById('ticket-regalia').textContent = uiState.selectedRegaliaChoice ? "Owns Uniform" : `Ordered Size ${regaliaSize}`;
-    document.getElementById('ticket-transport').textContent = transport === 'need' ? "Bus Requested" : "Provides Ride";
+    document.getElementById('ticket-transport').textContent = transport === 'N/A' ? 'N/A' : (transport === 'need' ? 'Bus Requested' : 'Provides Ride');
     document.getElementById('ticket-payment').textContent = paymentMethod === 'N/A' ? "N/A" : paymentMethod;
 
     logSystemEmail(fullname, area, "System Validation Sent");

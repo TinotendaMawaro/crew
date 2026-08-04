@@ -16,8 +16,8 @@ function initPWA() {
             "theme_color": "#6366f1",
             "icons": [
                 {
-                    "src": "CTF (1).png",
-                    "sizes": "512x512",
+                    "src": "assets/images/overflow logo (2).png",
+                    "sizes": "192x192",
                     "type": "image/png"
                 }
             ]
