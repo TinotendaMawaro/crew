@@ -72,7 +72,7 @@ Deno.serve(async (req) => {
         };
 
         const resendPayload = {
-            from: "HIM Media <noreply@heartfelt.org>",
+            from: "HIM Media <noreply@heartfeltonline.org>",
             to: [email],
             subject: subjectMap[type] || "HIM Media Crew Notification",
             html: `

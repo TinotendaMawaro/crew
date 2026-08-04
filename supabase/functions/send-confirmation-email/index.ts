@@ -50,7 +50,7 @@ Deno.serve(async (req) => {
     }
 
     const resendPayload = {
-      from: "HIM Media <noreply@heartfelt.org>",
+     from: "HIM Media <noreply@heartfeltonline.org>",
       to: [email],
       subject: `CTF 2026 Crew Registration Confirmed - ${servingNo}`,
       html: `
