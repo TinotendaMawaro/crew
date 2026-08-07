@@ -51,7 +51,8 @@ let registeredCrew = [];
 /* HOD authorized account metadata */
 const HOD_ACCOUNTS = [
     { email: 'holyhappy@gmail.com', name: 'Farai Mutsvene' },
-    { email: 'tmawaro25@gmail.com', name: 'Tinotenda Mawaro' }
+    { email: 'tmawaro25@gmail.com', name: 'Tinotenda Mawaro' },
+    { email: 'donmaminimini@gmail.com', name: 'Pastor Maminimini' }
 ];
 
 const HOD_EMAIL_ALLOWLIST = HOD_ACCOUNTS.map(account => account.email);
